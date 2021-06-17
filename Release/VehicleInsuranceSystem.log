@@ -1,0 +1,91 @@
+﻿  VehicleInsuranceSystem.cpp
+  The contents of <filesystem> are available only with C++17 or later.
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(73,22): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(77,27): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(122,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(177,227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(201,227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(220,227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(282,227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(312,227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(397,39): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(426,39): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(479,31): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(485,23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(537,31): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(543,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(556,31): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(562,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(575,31): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(581,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(618,14): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(618,26): error C2039: 'exists': is not a member of 'std'
+D:\School Stuff\CS103\VehicleInsuranceSystem\nlohmann\json.hpp(25183): message : see declaration of 'std'
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(618,8): error C3861: 'exists': identifier not found
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(648,31): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(655,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(686,39): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(764,31): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(770,23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(858,31): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(864,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(882,31): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(888,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(906,31): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(912,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(937,31): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(944,35): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(962,31): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(969,35): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1004,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1012,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1034,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1042,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1064,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1072,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1110,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1118,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1140,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1148,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1186,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1194,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1215,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1223,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1244,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1252,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1273,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1281,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1303,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1311,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1352,27): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1357,35): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1364,39): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1381,27): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1385,35): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1392,39): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1429,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1437,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1460,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1468,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1492,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1500,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1508,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1550,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1558,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1597,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1605,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1628,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1636,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1674,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1682,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1705,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1713,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1736,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1744,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1767,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1775,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1783,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1825,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1833,46): warning C4018: '>': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1856,43): warning C4018: '<': signed/unsigned mismatch
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(1864,46): warning C4018: '>': signed/unsigned mismatch
