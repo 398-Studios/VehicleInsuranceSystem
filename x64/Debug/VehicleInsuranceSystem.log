@@ -1,0 +1,27 @@
+﻿  VehicleInsuranceSystem.cpp
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(3,28): warning C4083: expected ')'; found identifier 'E0266'
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(127,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(183,227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(208,227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(228,227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(265,67): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(290,67): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(292,227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(299,67): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(321,67): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(323,227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(330,67): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(499,23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(561,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(580,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(599,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(673,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(791,23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(889,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(913,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(937,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(2700,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(2731,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(2766,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\School Stuff\CS103\VehicleInsuranceSystem\VehicleInsuranceSystem.cpp(2920,9): warning C4102: 'regEmail': unreferenced label
+  VehicleInsuranceSystem.vcxproj -> D:\School Stuff\CS103\VehicleInsuranceSystem\x64\Debug\VehicleInsuranceSystem.exe

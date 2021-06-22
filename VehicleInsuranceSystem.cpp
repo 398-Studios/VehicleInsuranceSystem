@@ -1,7 +1,9 @@
 ﻿#include "VehicleInsuranceSystem.h"
-
+//Everything Is Fine Dont Worry About This
+#pragma warning( disable : E0266)
 ifstream inFile;
 
+//Simple Little Function Which Carries The Whole Project
 User SearchForUser(string SearchForEmail) {
     string UserFileString = "Files/" + SearchForEmail + ".json";
     ifstream UserFile(UserFileString);
@@ -26,7 +28,6 @@ User SearchForUser(string SearchForEmail) {
     User ValidUser = User(Email, Username, Password, IsAdmin, RootUser, Banned, Policys);
     return ValidUser;
 }
-
 string DisplayBool(bool display) {
     if (display == true) {
         return "Y";
@@ -35,13 +36,11 @@ string DisplayBool(bool display) {
         return "N";
     }
 }
-
 int main()
 {
     //This Has To Be The Shortest Bloody main() That I Have Ever Done. Refer To The Header File For More Reasons Why I Fucking Hate This Shit
     VehicleInsuranceSystem::Login();
 }
-
 void VehicleInsuranceSystem::ConfirmPolicy(User Admin, bool AdminEdit, User CurrentUser, int PolicyNumber, string Plate, string Type, string Model, float Value, bool Modifications, float ValueOfMods, bool Financed, bool Business, int Kms, string Address, string FirstName, string LastName, string DOB, string Gender, int Incidents, int Drivers, int Length, float Cost, bool Status)
 {
     string fileLocation = "Files/" + CurrentUser.Email + ".json";
@@ -69,6 +68,12 @@ void VehicleInsuranceSystem::ConfirmPolicy(User Admin, bool AdminEdit, User Curr
     policy["Drivers"] = Drivers;
     policy["Length"] = Length;
     policy["Status"] = Status;
+
+    for (int i = 0; i < CurrentUser.Policies.size(); i++) {
+        if (CurrentUser.Policies[i]["Registration"] == Plate) {
+            CurrentUser.Policies[i] = policy;
+        }
+    }
 
     if (PolicyNumber > CurrentUser.Policies.size()) {
         CurrentUser.Policies.push_back(policy);
@@ -105,7 +110,7 @@ void VehicleInsuranceSystem::ConfirmPolicy(User Admin, bool AdminEdit, User Curr
         ViewPolicys(CurrentUser);
     }
 }
-
+// It Just Works
 void VehicleInsuranceSystem::PolicyDetails(User Admin, bool AdminEdit, bool AdminView, User CurrentUser, bool IsCanceled, bool IsNewQuote, int PolicyNumber, string Plate, string Type, string Model, float Value, bool Modifications, float ValueOfMods, bool Financed, bool Business, int Kms, string Address, string FirstName, string LastName, string DOB, string Gender, int Incidents, int Drivers, int Length, bool PolicyStatus)
 {
     //Stupid Maths For A Stupid Thing
@@ -173,10 +178,11 @@ void VehicleInsuranceSystem::PolicyDetails(User Admin, bool AdminEdit, bool Admi
         cancelPolicy:
         getline(cin, StringValue);
         if (!StringValue.empty()) {
-            if (StringValue == "Y" || StringValue == "y") {
+            transform(StringValue.begin(), StringValue.end(), StringValue.begin(), ::tolower);
+            if (StringValue == "y") {
                 ConfirmPolicy(Admin, AdminEdit, CurrentUser, PolicyNumber, Plate, Type, Model, Value, Modifications, ValueOfMods, Financed, Business, Kms, Address, FirstName, LastName, DOB, Gender, Incidents, Drivers, Length, Cost, false);
             }
-            if (StringValue == "N" || StringValue == "n") {
+            if (StringValue == "n") {
                 if (AdminEdit) {
                     ViewAllPolicys(Admin);
                 }
@@ -197,10 +203,11 @@ void VehicleInsuranceSystem::PolicyDetails(User Admin, bool AdminEdit, bool Admi
     renewPolicy:
         getline(cin, StringValue);
         if (!StringValue.empty()) {
-            if (StringValue == "Y" || StringValue == "y") {
+            transform(StringValue.begin(), StringValue.end(), StringValue.begin(), ::tolower);
+            if (StringValue == "y") {
                 ConfirmPolicy(Admin, AdminEdit, CurrentUser, PolicyNumber, Plate, Type, Model, Value, Modifications, ValueOfMods, Financed, Business, Kms, Address, FirstName, LastName, DOB, Gender, Incidents, Drivers, Length, Cost, true);
             }
-            if (StringValue == "N" || StringValue == "n") {
+            if (StringValue == "n") {
                 ViewAllPolicys(Admin);
             }
             else {
@@ -216,10 +223,11 @@ void VehicleInsuranceSystem::PolicyDetails(User Admin, bool AdminEdit, bool Admi
     renewPolicy2:
         getline(cin, StringValue);
         if (!StringValue.empty()) {
-            if (StringValue == "Y" || StringValue == "y") {
+            transform(StringValue.begin(), StringValue.end(), StringValue.begin(), ::tolower);
+            if (StringValue == "y") {
                 ConfirmPolicy(Admin, AdminEdit, CurrentUser, PolicyNumber, Plate, Type, Model, Value, Modifications, ValueOfMods, Financed, Business, Kms, Address, FirstName, LastName, DOB, Gender, Incidents, Drivers, Length, Cost, true);
             }
-            if (StringValue == "N" || StringValue == "n") {
+            if (StringValue == "n") {
                 if (AdminEdit) {
                     ViewAllPolicys(Admin);
                 }
@@ -247,8 +255,9 @@ policyconfirm:
     getline(cin, command);
     // Love Rewriting This Part
     if (AdminView) {
-        if (command == "Edit" || command == "Back" || command == "Quit" || command == "0" || command == "1" || command == "2") {
-            if (command == "Edit" || command == "0") {
+        transform(command.begin(), command.end(), command.begin(), ::tolower);
+        if (command == "edit" || command == "back" || command == "quit" || command == "0" || command == "1" || command == "2") {            
+            if (command == "edit" || command == "0") {
                 if (AdminView) {
                     PolicyNumber = PolicyNumber;
                 }
@@ -257,10 +266,10 @@ policyconfirm:
                 }
                 EditPolicy(Admin, AdminEdit, CurrentUser, IsNewQuote, PolicyNumber, Plate, Type, Model, Value, Modifications, ValueOfMods, Financed, Business, Kms, Address, FirstName, LastName, DOB, Gender, Incidents, Drivers, Length);
             }
-            if (command == "Back" || command == "1") {
+            if (command == "back" || command == "1") {
                 ViewAllPolicys(Admin);
             }
-            if (command == "Quit" || command == "2") {
+            if (command == "quit" || command == "2") {
                 exit(0);
             }
         }
@@ -271,8 +280,9 @@ policyconfirm:
     }
     // Same Thing Just Different
     else if (AdminEdit) {
-        if (command == "Confirm" || command == "Edit" || command == "Back" || command == "Quit" || command == "0" || command == "1" || command == "2" || command == "3") {
-            if (command == "Confirm" || command == "0") {
+        transform(command.begin(), command.end(), command.begin(), ::tolower);
+        if (command == "confirm" || command == "edit" || command == "back" || command == "quit" || command == "0" || command == "1" || command == "2" || command == "3") {
+            if (command == "confirm" || command == "0") {
                 if (AdminEdit) {
                     PolicyNumber = PolicyNumber;
                 }
@@ -281,7 +291,7 @@ policyconfirm:
                 }
                 ConfirmPolicy(Admin, AdminEdit, CurrentUser, PolicyNumber, Plate, Type, Model, Value, Modifications, ValueOfMods, Financed, Business, Kms, Address, FirstName, LastName, DOB, Gender, Incidents, Drivers, Length, Cost, true);
             }
-            if (command == "Edit" || command == "1") {
+            if (command == "edit" || command == "1") {
                 if (AdminEdit) {
                     PolicyNumber = PolicyNumber;
                 }
@@ -290,10 +300,10 @@ policyconfirm:
                 }
                 EditPolicy(Admin, AdminEdit, CurrentUser, IsNewQuote, PolicyNumber, Plate, Type, Model, Value, Modifications, ValueOfMods, Financed, Business, Kms, Address, FirstName, LastName, DOB, Gender, Incidents, Drivers, Length);
             }
-            if (command == "Back" || command == "2") {
+            if (command == "back" || command == "2") {
                 ViewAllPolicys(Admin);
             }
-            if (command == "Quit" || command == "3") {
+            if (command == "quit" || command == "3") {
                 exit(0);
             }
         }
@@ -301,8 +311,9 @@ policyconfirm:
     // I Just Fucking Hate This Shit Now
     else
     {
-        if (command == "Confirm" || command == "Edit" || command == "Menu" || command == "Quit" || command == "0" || command == "1" || command == "2") {
-            if (command == "Confirm" || command == "0") {
+        transform(command.begin(), command.end(), command.begin(), ::tolower);
+        if (command == "confirm" || command == "edit" || command == "menu" || command == "quit" || command == "0" || command == "1" || command == "2") {
+            if (command == "confirm" || command == "0") {
                 if (AdminEdit) {
                     PolicyNumber = PolicyNumber;
                 }
@@ -311,7 +322,7 @@ policyconfirm:
                 }
                 ConfirmPolicy(Admin, AdminEdit, CurrentUser, PolicyNumber, Plate, Type, Model, Value, Modifications, ValueOfMods, Financed, Business, Kms, Address, FirstName, LastName, DOB, Gender, Incidents, Drivers, Length, Cost, true);
             }
-            if (command == "Edit" || command == "1") {
+            if (command == "edit" || command == "1") {
                 if (AdminEdit) {
                     PolicyNumber = PolicyNumber;
                 }
@@ -320,7 +331,7 @@ policyconfirm:
                 }
                 EditPolicy(Admin, AdminEdit, CurrentUser, IsNewQuote, PolicyNumber, Plate, Type, Model, Value, Modifications, ValueOfMods, Financed, Business, Kms, Address, FirstName, LastName, DOB, Gender, Incidents, Drivers, Length);
             }
-            if (command == "Menu" || command == "2") {
+            if (command == "menu" || command == "2") {
                 if (AdminEdit) {
                     Menu(Admin, Admin.RootUser);
                 }
@@ -328,7 +339,7 @@ policyconfirm:
                     Menu(CurrentUser, CurrentUser.RootUser);
                 }
             }
-            if (command == "Quit" || command == "3") {
+            if (command == "quit" || command == "3") {
                 exit(0);
             }
         }
@@ -338,7 +349,7 @@ policyconfirm:
         }
     }
 }
-
+// Oh Why Did I Put Myself Through This Hell
 void VehicleInsuranceSystem::EditPolicy(User Admin, bool AdminEdit, User CurrentUser,bool IsNewQuote, int PolicyNumber, string Plate, string Type, string Model, float Value, bool Modifications, float ValueOfMods, bool Financed, bool Business, int Kms, string Address, string FirstName, string LastName, string DOB, string Gender, int Incidents, int Drivers, int Length)
 {
     // Policy Inputs Round 2. I Just Want To Fucking Die Now
@@ -387,7 +398,8 @@ aa:
 bb:
     getline(cin, ModsBool);
     if (!ModsBool.empty()) {
-        if (ModsBool == "y" || ModsBool == "Y") {
+        transform(ModsBool.begin(), ModsBool.end(), ModsBool.begin(), ::tolower);
+        if (ModsBool == "y") {
             Modifications = true;
             cout << "Edit The Value Of The Modifications On The Vehicle ($" << ValueOfMods << ") (MAX 6 Chars): $";
         cc:
@@ -408,7 +420,7 @@ bb:
                 }
             }
         }
-        else if (ModsBool == "n" || ModsBool == "N") {
+        else if (ModsBool == "n") {
             Modifications = false;
         }
         else {
@@ -443,10 +455,11 @@ bb:
 ee:
     getline(cin, StringValue);
     if (!StringValue.empty()) {
-        if (StringValue == "Y" || StringValue == "y") {
+        transform(StringValue.begin(), StringValue.end(), StringValue.begin(), ::tolower);
+        if (StringValue == "y") {
             Financed = true;
         }
-        if (StringValue == "N" || StringValue == "n") {
+        if (StringValue == "n") {
             Financed = false;
         }
         else {
@@ -459,10 +472,11 @@ ee:
 ff:
     getline(cin, StringValue);
     if (!StringValue.empty()) {
-        if (StringValue == "Y" || StringValue == "y") {
+        transform(StringValue.begin(), StringValue.end(), StringValue.begin(), ::tolower);
+        if (StringValue == "y") {
             Business = true;
         }
-        else if (StringValue == "N" || StringValue == "n") {
+        else if (StringValue == "n") {
             Business = false;
         }
         else {
@@ -520,8 +534,12 @@ hh:
 ii:
     getline(cin, StringValue);
     if (!StringValue.empty()) {
-        if (StringValue == "Male" || StringValue == "Female") {
+        transform(StringValue.begin(), StringValue.end(), StringValue.begin(), ::tolower);
+        if (StringValue == "male") {
             Gender = StringValue;
+        }
+        else if (StringValue == "female") {
+
         }
         else {
             cout << "Please Enter A Vaild Value (Male | Female): ";
@@ -590,7 +608,7 @@ ll:
 
     PolicyDetails(Admin, AdminEdit, false, CurrentUser, false, IsNewQuote, PolicyNumber, Plate, Type, Model, Value, Modifications, ValueOfMods, Financed, Business, Kms, Address, FirstName, LastName, DOB, Gender, Incidents, Drivers, Length, true);
 }
-
+// What Do You Think This Does Because I Dont Know
 void VehicleInsuranceSystem::NewPolicy(User Admin, bool AdminEdit, User CurrentUser, int PolicyNumber)
 {
     // Policy Inputs Round 1. Oh How I Under estimated this part.
@@ -676,7 +694,8 @@ d:
 e:
     getline(cin, ModsBool);
     if (!ModsBool.empty()) {
-        if (ModsBool == "y" || ModsBool == "Y") {
+        transform(ModsBool.begin(), ModsBool.end(), ModsBool.begin(), ::tolower);
+        if (ModsBool == "y") {
             Modifications = true;
             cout << "What Is The Value Of The Modifications On The Vehicle (MAX 6 Chars): $";
         f:
@@ -701,7 +720,7 @@ e:
                 goto f;
             }
         }
-        else if (ModsBool == "n" || ModsBool == "N") {
+        else if (ModsBool == "n") {
             Modifications = false;
         }
         else {
@@ -718,10 +737,11 @@ e:
     cout << "Is The Car Financed (Y | N): ";
     getline(cin, StringValue);
     if (!StringValue.empty()) {
-        if (StringValue == "Y" || StringValue == "y") {
+        transform(StringValue.begin(), StringValue.end(), StringValue.begin(), ::tolower);
+        if (StringValue == "y") {
             Financed = true;
         }
-        if (StringValue == "N" || StringValue == "n") {
+        if (StringValue == "n") {
             Financed = false;
         }
         else {
@@ -739,10 +759,11 @@ e:
 h:
     getline(cin, StringValue);
     if (!StringValue.empty()) {
-        if (StringValue == "Y" || StringValue == "y") {
+        transform(StringValue.begin(), StringValue.end(), StringValue.begin(), ::tolower);
+        if (StringValue == "y") {
             Business = true;
         }
-        else if (StringValue == "N" || StringValue == "n") {
+        else if (StringValue == "n") {
             Business = false;
         }
         else {
@@ -836,8 +857,12 @@ i:
     n:
     getline(cin, StringValue);
     if (!StringValue.empty()) {
-        if (StringValue == "Male" || StringValue == "Female") {
-            Gender = StringValue;
+        transform(StringValue.begin(), StringValue.end(), StringValue.begin(), ::tolower);
+        if (StringValue == "male") {
+            Gender = "Male";
+        }
+        else if (StringValue == "female") {
+            Gender = "Female";
         }
         else {
             cout << "Please Enter A Vaild Value (Male | Female): ";
@@ -923,7 +948,6 @@ i:
         
     PolicyDetails(Admin, AdminEdit, false, CurrentUser, false, true, PolicyNumber, Plate, Type, Model, Value, Modifications, ValueOfMods, Financed, Business, Kms, Address, FirstName, LastName, DOB, Gender, Incidents, Drivers, Length, true);
 }
-
 // Time For Speedrun Of Killing Myself Round 2
 void VehicleInsuranceSystem::ViewPolicys(User CurrentUser)
 {
@@ -1090,7 +1114,7 @@ void VehicleInsuranceSystem::ViewPolicys(User CurrentUser)
                 exit(0);
             }
             else {
-                cout << "Unknown Command. Valid Commands Are: View Policy (0) | Edit Policy (1) | Delete Policy (2) | Cancel Policy (3) | Back (4) | Quit (5)" << endl;
+                cout << "Unknown Command. Valid Commands Are: View Policy (0) | Edit Policy (1) | Cancel Policy (2) | Back (3) | Quit (4)" << endl;
                 goto viewAllCommandPolicysOnly1;
             }
         }
@@ -1333,7 +1357,6 @@ void VehicleInsuranceSystem::ViewPolicys(User CurrentUser)
             }
         }
 }
-
 // I NEVER EVER WANT TO TOUCH THIS FUCKING PIECE OF SHIT AGAIN. Oh Shit I forgot About The Non Admin Side
 void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
 {
@@ -1418,11 +1441,12 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
         viewAllCommandPolicysOnly:
             cout << ">";
             getline(cin, command);
-            if (command == "View Policy" || command == "0") {
+            transform(command.begin(), command.end(), command.begin(), ::tolower);
+            if (command == "view policy" || command == "0") {
                 string StringValue;
                 int PolicyChoice;
             policysViewChoose:
-                cout << "Please Enter The Number Of The Policy You Would Like To Edit: ";
+                cout << "Please Enter The Number Of The Policy You Would Like To View: ";
                 getline(cin, StringValue);
                 if (!StringValue.empty()) {
                     if (StringValue.length() <= 6) {
@@ -1449,7 +1473,7 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                     goto policysViewChoose;
                 }
             }
-            if (command == "Edit Policy" || command == "1") {
+            if (command == "edit policy" || command == "1") {
                 string StringValue;
                 int PolicyChoice;
             policysEditChoose:
@@ -1481,7 +1505,7 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                 }
             }
             // So Much Hassle To Just Say !fuckoff To A Piece Of Shit
-            if (command == "Delete Policy" || command == "2") {
+            if (command == "delete policy" || command == "2") {
                 string StringValue;
                 int PolicyChoice;
             policysDeleteChoose:
@@ -1539,7 +1563,7 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                     goto policysDeleteChoose;
                 }
             }
-            if (command == "Cancel Policy" || command == "3") {
+            if (command == "cancel policy" || command == "3") {
                 string StringValue;
                 int PolicyChoice;
             policysCancelChoose:
@@ -1570,10 +1594,10 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                     goto policysCancelChoose;
                 }
             }
-            if (command == "Back" || command == "4") {
+            if (command == "back" || command == "4") {
                 Menu(Admin, Admin.RootUser);
             }
-            if (command == "Quit" || command == "5") {
+            if (command == "quit" || command == "5") {
                 exit(0);
             }
             else {
@@ -1586,7 +1610,8 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
         viewAllCanceledPolicysCommand:
             cout << ">";
             getline(cin, command);
-            if (command == "View Policy" || command == "0") {
+            transform(command.begin(), command.end(), command.begin(), ::tolower);
+            if (command == "view policy" || command == "0") {
                 string StringValue;
                 int PolicyChoice;
             policysViewChoose1:
@@ -1617,7 +1642,7 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                     goto policysViewChoose1;
                 }
             }
-            if (command == "Renew Policy" || command == "1") {
+            if (command == "renew policy" || command == "1") {
                 string StringValue;
                 int PolicyChoice;
             policysRenewChoose:
@@ -1647,10 +1672,10 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                     goto policysRenewChoose;
                 }
             }
-            if (command == "Back" || command == "2") {
+            if (command == "back" || command == "2") {
                 Menu(Admin, Admin.RootUser);
             }
-            if (command == "Quit" || command == "3") {
+            if (command == "quit" || command == "3") {
                 exit(0);
             }
             else {
@@ -1663,7 +1688,8 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
         viewallcommand:
             cout << ">";
             getline(cin, command);
-            if (command == "View Policy" || command == "0") {
+            transform(command.begin(), command.end(), command.begin(), ::tolower);
+            if (command == "view policy" || command == "0") {
                 string StringValue;
                 int PolicyChoice;
             policysViewChoose3:
@@ -1694,7 +1720,7 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                     goto policysViewChoose3;
                 }
             }
-            if (command == "View Canceled Policy" || command == "1") {
+            if (command == "view canceled policy" || command == "1") {
                 string StringValue;
                 int PolicyChoice;
             policysViewChoose4:
@@ -1725,7 +1751,7 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                     goto policysViewChoose4;
                 }
             }
-            if (command == "Edit Policy" || command == "2") {
+            if (command == "edit policy" || command == "2") {
                 string StringValue;
                 int PolicyChoice;
             policysEditChoose3:
@@ -1756,7 +1782,7 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                     goto policysEditChoose3;
                 }
             }
-            if (command == "Delete Policy" || command == "3") {
+            if (command == "delete policy" || command == "3") {
                 string StringValue;
                 int PolicyChoice;
             policysDeleteChoose3:
@@ -1814,7 +1840,7 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                     goto policysDeleteChoose3;
                 }
             }
-            if (command == "Cancel Policy" || command == "4") {
+            if (command == "cancel policy" || command == "4") {
                 string StringValue;
                 int PolicyChoice;
             policysCancelChoose3:
@@ -1845,7 +1871,7 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                     goto policysCancelChoose3;
                 }
             }
-            if (command == "Renew Policy" || command == "5") {
+            if (command == "renew policy" || command == "5") {
                 string StringValue;
                 int PolicyChoice;
             policysRenewChoose3:
@@ -1875,10 +1901,10 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
                     goto policysRenewChoose3;
                 }
             }
-            if (command == "Back" || command == "6") {
+            if (command == "back" || command == "6") {
                 Menu(Admin, Admin.RootUser);
             }
-            if (command == "Quit" || command == "7") {
+            if (command == "quit" || command == "7") {
                 exit(0);
             }
             else {
@@ -1888,17 +1914,456 @@ void VehicleInsuranceSystem::ViewAllPolicys(User Admin)
         }
     }
 }
-
-void VehicleInsuranceSystem::ViewUser(User CurrentUser)
+// round 5 of saying my
+void VehicleInsuranceSystem::ViewUser(User Admin, bool AdminEdit, User CurrentUser)
 {
-}
+    system("CLS");
+    cout << "======================================================================================================" << endl;
+    cout << "                       Editing Current User: " << CurrentUser.Email << endl;
+    cout << "======================================================================================================\n" << endl;    
 
+    if (AdminEdit && Admin.RootUser) {
+        cout << "\tEmail: " << CurrentUser.Email << endl;
+        cout << "\tUsername: " << CurrentUser.Username << endl;
+        cout << boolalpha;
+        cout << "\tAdmin: " << CurrentUser.IsAdmin << endl;
+        cout << "\tIs User Banned: " << CurrentUser.Banned << endl;
+        
+        if (!CurrentUser.Banned && CurrentUser.IsAdmin) {
+            cout << "\nYour Current Commands Are: Demote Admin (0) | Ban Admin (1) | Back (2) | Quit (3)" << endl;
+        }
+        if (!CurrentUser.Banned && !CurrentUser.IsAdmin) {
+            cout << "\nYour Current Commands Are: Promote User (0) | Ban User (1) | Back (2) | Quit (3)" << endl;
+        }
+        if (CurrentUser.Banned && CurrentUser.IsAdmin) {
+            cout << "\nYour Current Commands Are: Demote Admin (0) | Unban Admin (1) | Back (2) | Quit (3)" << endl;
+        }
+        if (CurrentUser.Banned && !CurrentUser.IsAdmin) {
+            cout << "\nYour Current Commands Are: Promote User (0) | Unban User (1) | Back (2) | Quit (3)" << endl;
+        }
+        
+        string str;
+    rootedit:
+        cout << ">";
+        getline(cin, str);
+        if (!str.empty())
+        {
+            transform(str.begin(), str.end(), str.begin(), ::tolower);
+            if (CurrentUser.IsAdmin) {
+                if (str == "demote admin" || str == "1") {
+                    cout << "Do You Want To Demote This Admin (Y | N): ";
+                    string strValue;
+                rootdemote:
+                    getline(cin, strValue);
+                    if (!strValue.empty()) {
+                        transform(strValue.begin(), strValue.end(), strValue.begin(), ::tolower);
+                        if (strValue == "n") {
+                            ViewUser(Admin, true, CurrentUser);
+                        }
+                        if (strValue == "y") {
+
+                            json temp = {
+                                {"Email", CurrentUser.Email},
+                                {"Username", CurrentUser.Username},
+                                {"Password", CurrentUser.Password},
+                                {"RootUser", CurrentUser.RootUser},
+                                {"IsAdmin", false},
+                                {"Banned", CurrentUser.Banned},
+                                {"Policys", CurrentUser.Policies}
+                            };
+
+                            string filename = "Files/" + CurrentUser.Email + ".json";
+                            ofstream UserFile(filename, ofstream::out | ofstream::trunc);
+
+                            if (UserFile.is_open()) {
+                                UserFile << temp;
+                            }
+                            UserFile.close();
+
+                            CurrentUser = SearchForUser(temp["Email"]);
+                            ViewUser(Admin, true, CurrentUser);
+                        }
+                        else {
+                            cout << "Please Input A Valid Value (Y | N)" << endl;
+                            goto rootdemote;
+                        }
+                    }
+                    else {
+                        cout << "The Value Can Not Be Empty" << endl;
+                        goto rootdemote;
+                    }
+                }
+                if (!CurrentUser.Banned) {
+                    if (str == "ban admin" || str == "2") {
+                        cout << "Do You Want To Ban This Admin (Y | N): ";
+                        string strValue;
+                    rootban:
+                        getline(cin, strValue);
+                        if (!strValue.empty()) {
+                            transform(strValue.begin(), strValue.end(), strValue.begin(), ::tolower);
+                            if (strValue == "n") {
+                                ViewUser(Admin, true, CurrentUser);
+                            }
+                            if (strValue == "y") {
+
+                                json temp = {
+                                    {"Email", CurrentUser.Email},
+                                    {"Username", CurrentUser.Username},
+                                    {"Password", CurrentUser.Password},
+                                    {"RootUser", CurrentUser.RootUser},
+                                    {"IsAdmin", CurrentUser.IsAdmin},
+                                    {"Banned", true},
+                                    {"Policys", CurrentUser.Policies}
+                                };
+
+                                string filename = "Files/" + CurrentUser.Email + ".json";
+                                ofstream UserFile(filename, ofstream::out | ofstream::trunc);
+
+                                if (UserFile.is_open()) {
+                                    UserFile << temp;
+                                }
+                                UserFile.close();
+
+                                CurrentUser = SearchForUser(temp["Email"]);
+                                ViewUser(Admin, true, CurrentUser);
+                            }
+                            else {
+                                cout << "Please Input A Valid Value (Y | N)" << endl;
+                                goto rootban;
+                            }
+                        }
+                        else {
+                            cout << "The Value Can Not Be Empty" << endl;
+                            goto rootban;
+                        }
+                    }
+                }
+                else {
+                    if (str == "unban admin" || str == "2") {
+                        cout << "Do You Want To Ban This Admin (Y | N): ";
+                        string strValue;
+                    rootUnban:
+                        getline(cin, strValue);
+                        if (!strValue.empty()) {
+                            transform(strValue.begin(), strValue.end(), strValue.begin(), ::tolower);
+                            if (strValue == "n") {
+                                ViewUser(Admin, true, CurrentUser);
+                            }
+                            if (strValue == "y") {
+
+                                json temp = {
+                                    {"Email", CurrentUser.Email},
+                                    {"Username", CurrentUser.Username},
+                                    {"Password", CurrentUser.Password},
+                                    {"RootUser", CurrentUser.RootUser},
+                                    {"IsAdmin", CurrentUser.IsAdmin},
+                                    {"Banned", false},
+                                    {"Policys", CurrentUser.Policies}
+                                };
+
+                                string filename = "Files/" + CurrentUser.Email + ".json";
+                                ofstream UserFile(filename, ofstream::out | ofstream::trunc);
+
+                                if (UserFile.is_open()) {
+                                    UserFile << temp;
+                                }
+                                UserFile.close();
+
+                                CurrentUser = SearchForUser(temp["Email"]);
+                                ViewUser(Admin, true, CurrentUser);
+                            }
+                            else {
+                                cout << "Please Input A Valid Value (Y | N)" << endl;
+                                goto rootUnban;
+                            }
+                        }
+                        else {
+                            cout << "The Value Can Not Be Empty" << endl;
+                            goto rootUnban;
+                        }
+                    }
+                }
+            }
+            else {
+                if (str == "promote admin" || str == "1") {
+                    cout << "Do You Want To Promote This User (Y | N): ";
+                    string strValue;
+                adminpromote:
+                    getline(cin, strValue);
+                    if (!strValue.empty()) {
+                        transform(strValue.begin(), strValue.end(), strValue.begin(), ::tolower);
+                        if (strValue == "n") {
+                            ViewUser(Admin, true, CurrentUser);
+                        }
+                        if (strValue == "y") {
+
+                            json temp = {
+                                {"Email", CurrentUser.Email},
+                                {"Username", CurrentUser.Username},
+                                {"Password", CurrentUser.Password},
+                                {"RootUser", CurrentUser.RootUser},
+                                {"IsAdmin", true},
+                                {"Banned", CurrentUser.Banned},
+                                {"Policys", CurrentUser.Policies}
+                            };
+
+                            string filename = "Files/" + CurrentUser.Email + ".json";
+                            ofstream UserFile(filename, ofstream::out | ofstream::trunc);
+
+                            if (UserFile.is_open()) {
+                                UserFile << temp;
+                            }
+                            UserFile.close();
+
+                            CurrentUser = SearchForUser(temp["Email"]);
+                            ViewUser(Admin, true, CurrentUser);
+                        }
+                        else {
+                            cout << "Please Input A Valid Value (Y | N)" << endl;
+                            goto adminpromote;
+                        }
+                    }
+                    else {
+                        cout << "The Value Can Not Be Empty" << endl;
+                        goto adminpromote;
+                    }
+                }
+                if (!CurrentUser.Banned) {
+                    if (str == "ban user" || str == "2") {
+                        cout << "Do You Want To Ban This User (Y | N): ";
+                        string strValue;
+                    userban:
+                        getline(cin, strValue);
+                        if (!strValue.empty()) {
+                            transform(strValue.begin(), strValue.end(), strValue.begin(), ::tolower);
+                            if (strValue == "n") {
+                                ViewUser(Admin, true, CurrentUser);
+                            }
+                            if (strValue == "y") {
+
+                                json temp = {
+                                    {"Email", CurrentUser.Email},
+                                    {"Username", CurrentUser.Username},
+                                    {"Password", CurrentUser.Password},
+                                    {"RootUser", CurrentUser.RootUser},
+                                    {"IsAdmin", CurrentUser.IsAdmin},
+                                    {"Banned", true},
+                                    {"Policys", CurrentUser.Policies}
+                                };
+
+                                string filename = "Files/" + CurrentUser.Email + ".json";
+                                ofstream UserFile(filename, ofstream::out | ofstream::trunc);
+
+                                if (UserFile.is_open()) {
+                                    UserFile << temp;
+                                }
+                                UserFile.close();
+
+                                CurrentUser = SearchForUser(temp["Email"]);
+                                ViewUser(Admin, true, CurrentUser);
+                            }
+                            else {
+                                cout << "Please Input A Valid Value (Y | N)" << endl;
+                                goto userban;
+                            }
+                        }
+                        else {
+                            cout << "The Value Can Not Be Empty" << endl;
+                            goto userban;
+                        }
+                    }
+                }
+                else {
+                    if (str == "unban user" || str == "2") {
+                        cout << "Do You Want To Ban This User (Y | N): ";
+                        string strValue;
+                    userUnban:
+                        getline(cin, strValue);
+                        if (!strValue.empty()) {
+                            transform(strValue.begin(), strValue.end(), strValue.begin(), ::tolower);
+                            if (strValue == "n") {
+                                ViewUser(Admin, true, CurrentUser);
+                            }
+                            if (strValue == "y") {
+
+                                json temp = {
+                                    {"Email", CurrentUser.Email},
+                                    {"Username", CurrentUser.Username},
+                                    {"Password", CurrentUser.Password},
+                                    {"RootUser", CurrentUser.RootUser},
+                                    {"IsAdmin", CurrentUser.IsAdmin},
+                                    {"Banned", false},
+                                    {"Policys", CurrentUser.Policies}
+                                };
+
+                                string filename = "Files/" + CurrentUser.Email + ".json";
+                                ofstream UserFile(filename, ofstream::out | ofstream::trunc);
+
+                                if (UserFile.is_open()) {
+                                    UserFile << temp;
+                                }
+                                UserFile.close();
+
+                                CurrentUser = SearchForUser(temp["Email"]);
+                                ViewUser(Admin, true, CurrentUser);
+                            }
+                            else {
+                                cout << "Please Input A Valid Value (Y | N)" << endl;
+                                goto userUnban;
+                            }
+                        }
+                        else {
+                            cout << "The Value Can Not Be Empty" << endl;
+                            goto userUnban;
+                        }
+                    }
+                }
+            }
+            if (str == "back" || str == "3") {
+                ViewAllUsers(Admin);
+            }
+            if (str == "quit" || str == "4") {
+                exit(0);
+            }
+        }
+        else {
+            cout << "This Input Cant Be Empty: ";
+            goto rootedit;
+        }
+    }
+    if (AdminEdit && !Admin.RootUser) {
+        cout << "\tEmail: " << CurrentUser.Email << endl;
+        cout << "\tUsername: " << CurrentUser.Username << endl;
+        cout << boolalpha;
+        cout << "\tIs User Banned: " << CurrentUser.Banned << endl;
+
+        if (!CurrentUser.Banned) {
+            cout << "\nYour Current Commands Are: Ban User (0) | Back (1) | Quit (2)" << endl;
+        }
+        if (CurrentUser.Banned) {
+            cout << "\nYour Current Commands Are: Unban User (0) | Back (1) | Quit (2)" << endl;
+        }
+
+        string str;
+    adminedit:
+        cout << ">";
+        getline(cin, str);
+        transform(str.begin(), str.end(), str.begin(), ::tolower);
+        if (!str.empty())
+        {
+            if (!CurrentUser.Banned) {
+                if (str == "ban user" || str == "0") {
+                    cout << "Do You Want To Ban This User (Y | N): ";
+                    string strValue;
+                adminUserban:
+                    getline(cin, strValue);
+                    if (!strValue.empty()) {
+                        transform(strValue.begin(), strValue.end(), strValue.begin(), ::tolower);
+                        if (strValue == "n") {
+                            ViewUser(Admin, true, CurrentUser);
+                        }
+                        if (strValue == "y") {
+
+                            json temp = {
+                                {"Email", CurrentUser.Email},
+                                {"Username", CurrentUser.Username},
+                                {"Password", CurrentUser.Password},
+                                {"RootUser", CurrentUser.RootUser},
+                                {"IsAdmin", CurrentUser.IsAdmin},
+                                {"Banned", true},
+                                {"Policys", CurrentUser.Policies}
+                            };
+
+                            string filename = "Files/" + CurrentUser.Email + ".json";
+                            ofstream UserFile(filename, ofstream::out | ofstream::trunc);
+
+                            if (UserFile.is_open()) {
+                                UserFile << temp;
+                            }
+                            UserFile.close();
+
+                            CurrentUser = SearchForUser(temp["Email"]);
+                            ViewUser(Admin, true, CurrentUser);
+                        }
+                        else {
+                            cout << "Please Input A Valid Value (Y | N)" << endl;
+                            goto adminUserban;
+                        }
+                    }
+                    else {
+                        cout << "The Value Can Not Be Empty" << endl;
+                        goto adminUserban;
+                    }
+                }
+            }
+            else {
+                if (str == "unban user" || str == "0") {
+                    cout << "Do You Want To Ban This User (Y | N): ";
+                    string strValue;
+                adminUnban:
+                    getline(cin, strValue);
+                    if (!strValue.empty()) {
+                        transform(strValue.begin(), strValue.end(), strValue.begin(), ::tolower);
+                        if (strValue == "n") {
+                            ViewUser(Admin, true, CurrentUser);
+                        }
+                        if (strValue == "y") {
+
+                            json temp = {
+                                {"Email", CurrentUser.Email},
+                                {"Username", CurrentUser.Username},
+                                {"Password", CurrentUser.Password},
+                                {"RootUser", CurrentUser.RootUser},
+                                {"IsAdmin", CurrentUser.IsAdmin},
+                                {"Banned", false},
+                                {"Policys", CurrentUser.Policies}
+                            };
+
+                            string filename = "Files/" + CurrentUser.Email + ".json";
+                            ofstream UserFile(filename, ofstream::out | ofstream::trunc);
+
+                            if (UserFile.is_open()) {
+                                UserFile << temp;
+                            }
+                            UserFile.close();
+
+                            CurrentUser = SearchForUser(temp["Email"]);
+                            ViewUser(Admin, true, CurrentUser);
+                        }
+                        else {
+                            cout << "Please Input A Valid Value (Y | N)" << endl;
+                            goto adminUnban;
+                        }
+                    }
+                    else {
+                        cout << "The Value Can Not Be Empty" << endl;
+                        goto adminUnban;
+                    }
+                }
+            }
+            if (str == "back" || str == "1") {
+                ViewAllUsers(Admin);
+            }
+            if (str == "quit" || str == "2") {
+                exit(0);
+            }
+            else {
+                cout << "Unknown Command: ";
+                goto adminedit;
+            }
+        }
+        else {
+            cout << "This Input Cant Be Empty: ";
+            goto adminedit;
+        }
+    }
+}
 // round 4 Of speedrunning life
 void VehicleInsuranceSystem::ViewAllUsers(User Admin)
 {
     system("CLS");
     if (Admin.RootUser) {
-        
+
         string UsersFile = "Files/AllUsers.json";
         ifstream file(UsersFile);
 
@@ -1907,10 +2372,9 @@ void VehicleInsuranceSystem::ViewAllUsers(User Admin)
 
             file >> j;
 
-            // For Coding This At 1am I Think Its Pretty Good
             json AdminsList;
             json UserList;
-            cout << "====[ Admins ]====" << endl;
+            cout << "\t\t\t\t====[ Admins ]====" << endl;
             for (int i = 0; i < j.size(); i++)
             {
                 User CurrentUser = SearchForUser(j[i]["User"]);
@@ -1920,18 +2384,18 @@ void VehicleInsuranceSystem::ViewAllUsers(User Admin)
                             { "Email", CurrentUser.Email}
                         };
                         cout << boolalpha;
-                        cout << "   (" << (i + 1) << ") Email: " << CurrentUser.Email << " Username: " << CurrentUser.Username + " Is User Banned: " << CurrentUser.Banned << " Current Status: Admin" << endl;
+                        cout << "   (" << (AdminsList.size() + 1) << ") Email: " << CurrentUser.Email << " Username: " << CurrentUser.Username + " Is User Banned: " << CurrentUser.Banned << " Current Status: Admin" << endl;
                         AdminsList.push_back(k);
                     }
                     else {
 
                     }
-                }                
+                }
             }
             if (AdminsList.size() == 0) {
                 cout << "\nThere Are No Admins" << endl;
             }
-            cout << "\n====[ Users ]====" << endl;
+            cout << "\n\t\t\t\t====[ Users ]====" << endl;
             for (int i = 0; i < j.size(); i++) {
                 User CurrentUser = SearchForUser(j[i]["User"]);
                 if (!CurrentUser.RootUser) {
@@ -1940,41 +2404,7 @@ void VehicleInsuranceSystem::ViewAllUsers(User Admin)
                             { "Email", CurrentUser.Email}
                         };
                         cout << boolalpha;
-                        cout << "   (" << (i + 1) << ") Email: " << CurrentUser.Email << " Username: " << CurrentUser.Username + " Is User Banned: " << CurrentUser.Banned << " Current Status: User" << endl;
-                        UserList.push_back(k);
-                    }
-                    else {
-
-                    }
-                }                
-            }
-            if (UserList.size() == 0) {
-                cout << "\n\nThere Are No Users" << endl;
-            }
-            
-        }
-    }
-    if (Admin.IsAdmin) {
-
-        string UsersFile = "Files/AllUsers.json";
-        ifstream file(UsersFile);
-
-        if (!file.fail()) {
-            json j;
-
-            file >> j;
-
-            json UserList;
-            cout << "====[ Users ]====" << endl;
-            for (int i = 0; i < j.size(); i++) {
-                User CurrentUser = SearchForUser(j[i]["User"]);
-                if (!CurrentUser.RootUser) {
-                    if (!CurrentUser.IsAdmin) {
-                        json k = {
-                            { "Email", CurrentUser.Email}
-                        };
-                        cout << boolalpha;
-                        cout << "   (" << (i + 1) << ") Email: " << CurrentUser.Email << " Username: " << CurrentUser.Username + " Is User Banned: " << CurrentUser.Banned << " Current Status: User" << endl;
+                        cout << "   (" << (UserList.size() + 1) << ") Email: " << CurrentUser.Email << " Username: " << CurrentUser.Username + " Is User Banned: " << CurrentUser.Banned << " Current Status: User" << endl;
                         UserList.push_back(k);
                     }
                     else {
@@ -1986,10 +2416,264 @@ void VehicleInsuranceSystem::ViewAllUsers(User Admin)
                 cout << "\n\nThere Are No Users" << endl;
             }
 
+            if (AdminsList.size() == 0 && UserList.size() == 0) {
+                Menu(Admin, Admin.RootUser);
+            }
+            if (AdminsList.size() > 0 && UserList.size() > 0) {
+                cout << "Your Current Options Are: View Admin (0) | View User (1) | Back (2) | Quit (3)" << endl;
+                string command;
+            viewAllUsers:
+                cout << ">";
+                getline(cin, command);
+                transform(command.begin(), command.end(), command.begin(), ::tolower);
+                if (!command.empty()) {
+                    if (command == "view admin" || command == "0") {
+                        string str;
+                        int AdminChoice;
+                        cout << "\nPlease Pick A Admin That You Would Like To View: ";
+                    adminsViewChoose:
+                        getline(cin, str);
+                        if (!str.empty()) {
+                            if (str.length() <= 6) {
+                                for (int i = 0; i < str.length(); i++) {
+                                    if (!isdigit(str[i])) {
+                                        cout << "Please Enter A Valid Number: ";
+                                        goto adminsViewChoose;
+                                    }
+                                }
+                                AdminChoice = stoi(str);
+
+                                if (AdminChoice - 1 > AdminsList.size()) {
+                                    cout << "Number Cant Be More Than The Amount Of Admins: ";
+                                    goto adminsViewChoose;
+                                }
+                                User CurrentUser = SearchForUser(AdminsList[AdminChoice - 1]["Email"]);
+                                ViewUser(Admin, true, CurrentUser);
+                            }
+                        }
+                    }
+                    if (command == "view user" || command == "1") {
+                        string str;
+                        int UserChoice;
+                        cout << "\nPlease Pick A Admin That You Would Like To View: ";
+                    usersViewChoose:
+                        getline(cin, str);
+                        if (!str.empty()) {
+                            if (str.length() <= 6) {
+                                for (int i = 0; i < str.length(); i++) {
+                                    if (!isdigit(str[i])) {
+                                        cout << "Please Enter A Valid Number: ";
+                                        goto usersViewChoose;
+                                    }
+                                }
+                                UserChoice = stoi(str);
+
+                                if (UserChoice - 1 > AdminsList.size()) {
+                                    cout << "Number Cant Be More Than The Amount Of Admins: ";
+                                    goto usersViewChoose;
+                                }
+                                User CurrentUser = SearchForUser(UserList[UserChoice - 1]["Email"]);
+                                ViewUser(Admin, true, CurrentUser);
+                            }
+                        }
+                    }
+                    if (command == "back" || command == "2") {
+                        Menu(Admin, Admin.RootUser);
+                    }
+                    if (command == "quit" || command == "3") {
+                        exit(0);
+                    }
+                    else {
+                        cout << "Unknown Command: ";
+                        goto viewAllUsers;
+                    }
+                }
+                else {
+                    cout << "This Input Cant Be Empty: ";
+                    goto viewAllUsers;
+                }
+            }
+            if (AdminsList.size() > 0 && UserList.size() == 0) {
+                cout << "Your Current Options Are: View Admin (0) | Back (1) | Quit (2)" << endl;
+                string command;
+            viewAllAdmins:
+                cout << ">";
+                getline(cin, command);
+                transform(command.begin(), command.end(), command.begin(), ::tolower);
+                if (!command.empty()) {
+                    if (command == "view admin" || command == "0") {
+                        string str;
+                        int AdminChoice;
+                        cout << "\nPlease Pick A Admin That You Would Like To View: ";
+                    adminsViewChoose2:
+                        getline(cin, str);
+                        if (!str.empty()) {
+                            if (str.length() <= 6) {
+                                for (int i = 0; i < str.length(); i++) {
+                                    if (!isdigit(str[i])) {
+                                        cout << "Please Enter A Valid Number: ";
+                                        goto adminsViewChoose2;
+                                    }
+                                }
+                                AdminChoice = stoi(str);
+
+                                if (AdminChoice - 1 > AdminsList.size()) {
+                                    cout << "Number Cant Be More Than The Amount Of Admins: ";
+                                    goto adminsViewChoose2;
+                                }
+                                User CurrentUser = SearchForUser(AdminsList[AdminChoice - 1]["Email"]);
+                                ViewUser(Admin, true, CurrentUser);
+                            }
+                        }
+                    }
+                    if (command == "back" || command == "1") {
+                        Menu(Admin, Admin.RootUser);
+                    }
+                    if (command == "quit" || command == "2") {
+                        exit(0);
+                    }
+                    else {
+                        cout << "Unknown Command: ";
+                        goto viewAllAdmins;
+                    }
+                }
+                if (AdminsList.size() == 0 && UserList.size() > 0) {
+                    cout << "\nYour Current Options Are: View User (0) | Back (1) | Quit (2)" << endl;
+                    string command;
+                adminViewAllUsers2:
+                    cout << ">";
+                    getline(cin, command);
+                    transform(command.begin(), command.end(), command.begin(), ::tolower);
+                    if (!command.empty()) {
+                        if (command == "view user" || command == "0") {
+                            string str;
+                            int UserChoice;
+                            cout << "\nPlease Pick A User That You Would Like To View: ";
+                        usersViewChoose3:
+                            getline(cin, str);
+                            if (!str.empty()) {
+                                if (str.length() <= 6) {
+                                    for (int i = 0; i < str.length(); i++) {
+                                        if (!isdigit(str[i])) {
+                                            cout << "Please Enter A Valid Number: ";
+                                            goto usersViewChoose3;
+                                        }
+                                    }
+                                    UserChoice = stoi(str);
+
+                                    if (UserChoice - 1 > UserList.size()) {
+                                        cout << "Number Cant Be More Than The Amount Of Users: ";
+                                        goto usersViewChoose3;
+                                    }
+                                    User CurrentUser = SearchForUser(UserList[UserChoice - 1]["Email"]);
+                                    ViewUser(Admin, true, CurrentUser);
+                                }
+                            }
+                        }
+                        if (command == "back" || command == "1") {
+                            Menu(Admin, Admin.RootUser);
+                        }
+                        if (command == "quit" || command == "2") {
+                            exit(0);
+                        }
+                        else {
+                            cout << "Unknown Command: ";
+                            goto adminViewAllUsers2;
+                        }
+                    }
+                    else {
+                        cout << "This Input Cant Be Empty: ";
+                        goto adminViewAllUsers2;
+                    }
+                }
+            }
+        }
+        
+
+    }
+    if (Admin.IsAdmin && !Admin.RootUser) {
+
+        string UsersFile = "Files/AllUsers.json";
+        ifstream file(UsersFile);
+
+        if (!file.fail()) {
+            json j;
+
+            file >> j;
+
+            json UserList;
+            cout << "\t\t\t\t====[ Users ]====" << endl;
+            for (int i = 0; i < j.size(); i++) {
+                User CurrentUser = SearchForUser(j[i]["User"]);
+                if (!CurrentUser.RootUser) {
+                    if (!CurrentUser.IsAdmin) {
+                        json k = {
+                            { "Email", CurrentUser.Email}
+                        };
+                        cout << boolalpha;
+                        cout << "   (" << (UserList.size() + 1) << ") Email: " << CurrentUser.Email << " Username: " << CurrentUser.Username + " Is User Banned: " << CurrentUser.Banned << " Current Status: User" << endl;
+                        UserList.push_back(k);
+                    }
+                    else {
+
+                    }
+                }
+            }
+            if (UserList.size() == 0) {
+                Menu(Admin, Admin.RootUser);
+            }
+
+            cout << "\nYour Current Options Are: View User (0) | Back (1) | Quit (2)" << endl;
+            string command;
+        adminViewAllUsers:
+            cout << ">";
+            getline(cin, command);
+            transform(command.begin(), command.end(), command.begin(), ::tolower);
+            if (!command.empty()) {
+                if (command == "view user" || command == "0") {
+                    string str;
+                    int UserChoice;
+                    cout << "\nPlease Pick A User That You Would Like To View: ";
+                usersViewChoose2:
+                    getline(cin, str);
+                    if (!str.empty()) {
+                        if (str.length() <= 6) {
+                            for (int i = 0; i < str.length(); i++) {
+                                if (!isdigit(str[i])) {
+                                    cout << "Please Enter A Valid Number: ";
+                                    goto usersViewChoose2;
+                                }
+                            }
+                            UserChoice = stoi(str);
+
+                            if (UserChoice - 1 > UserList.size()) {
+                                cout << "Number Cant Be More Than The Amount Of Users: ";
+                                goto usersViewChoose2;
+                            }
+                            User CurrentUser = SearchForUser(UserList[UserChoice - 1]["Email"]);
+                            ViewUser(Admin, true, CurrentUser);
+                        }
+                    }
+                }
+                if (command == "back" || command == "1") {
+                    Menu(Admin, Admin.RootUser);
+                }
+                if (command == "quit" || command == "2") {
+                    exit(0);
+                }
+                else {
+                    cout << "Unknown Command: ";
+                    goto adminViewAllUsers;
+                }
+            }
+            else
+            {
+                cout << "This Input Cant Be Empty: ";
+                goto adminViewAllUsers;
+            }
         }
     }
 }
-
 void VehicleInsuranceSystem::Menu(User CurrentUser, bool RootUser) {
     SetConsoleTitle(TEXT("398 Studios Insurance | Menu"));
     system("CLS");
@@ -2001,21 +2685,24 @@ void VehicleInsuranceSystem::Menu(User CurrentUser, bool RootUser) {
     User FakeUser = User("", "", "", false, false, true, "");
 
     if (!CurrentUser.IsAdmin) {
-        cout << "Welcome. Your Current Commands Are: Manage Personal Policys (0) | New Policy (1) | Quit (4)" << endl;
+        cout << "Welcome. Your Current Commands Are: Manage Personal Policys (0) | New Policy (1) | Logout (3) | Quit (4)" << endl;
         while (menu) {
             string command;
             cout << ">";
             getline(cin, command);
-
-            if (command == "Manage Personal Policys" || command == "0")
+            transform(command.begin(), command.end(), command.begin(), ::tolower);
+            if (command == "manage personal policys" || command == "0")
             {
                 ViewPolicys(CurrentUser);
             }
-            if (command == "New Policy" || command == "1")
+            if (command == "new policy" || command == "1")
             {
                 NewPolicy(FakeUser, false, CurrentUser, CurrentUser.Policies.size() + 1);
             }
-            else if (command == "Quit" || command == "4") {
+            if (command == "logout" || command == "3") {
+                Login();
+            }
+            else if (command == "quit" || command == "4") {
                 exit(0);
             }
             else
@@ -2025,29 +2712,32 @@ void VehicleInsuranceSystem::Menu(User CurrentUser, bool RootUser) {
         }
     }
     else if (CurrentUser.RootUser) {
-        cout << "Welcome. Your Current Commands Are: Manage All Policies (0) | Manage Personal Policys (1) |  New Policy (2) | Manage All Users (3) | Quit (4)" << endl;
+        cout << "Welcome. Your Current Commands Are: Manage All Policies (0) | Manage Personal Policys (1) |  New Policy (2) | Manage All Users (3) | Logout (4) | Quit (5)" << endl;
         while (menu) {
             string command;
             cout << ">";
             getline(cin, command);
-
-            if (command == "Manage All Policies" || command == "0")
+            transform(command.begin(), command.end(), command.begin(), ::tolower);
+            if (command == "manage all policies" || command == "0")
             {
                 ViewAllPolicys(CurrentUser);
             }
-            if (command == "Manage Personal Policies" || command == "1")
+            if (command == "manage personal policies" || command == "1")
             {
                 ViewPolicys(CurrentUser);
             }
-            if (command == "New Policy" || command == "2")
+            if (command == "new policy" || command == "2")
             {
                 NewPolicy(FakeUser, false, CurrentUser, CurrentUser.Policies.size() + 1);
             }
-            if (command == "Manage All Users" || command == "3")
+            if (command == "manage all users" || command == "3")
             {
                 ViewAllUsers(CurrentUser);
             }
-            else if (command == "Quit" || command == "4") {
+            if (command == "logout" || command == "4") {
+                Login();
+            }
+            else if (command == "quit" || command == "5") {
                 exit(0);
             }
             else
@@ -2057,29 +2747,32 @@ void VehicleInsuranceSystem::Menu(User CurrentUser, bool RootUser) {
         }
     }
     else {        
-        cout << "Welcome. Your Current Commands Are: Manage All Policies (0) | Manage Personal Policys (1) |  New Policy (2) | Manage All Users (3) | Quit (4)" << endl;
+        cout << "Welcome. Your Current Commands Are: Manage All Policies (0) | Manage Personal Policys (1) |  New Policy (2) | Manage All Users (3) | Logout (4) | Quit (5)" << endl;
         while (menu) {
             string command;
             cout << ">";
             getline(cin, command);
-
-            if (command == "Manage All Policies" || command == "0")
+            transform(command.begin(), command.end(), command.begin(), ::tolower);
+            if (command == "manage all policies" || command == "0")
             {
                 ViewAllPolicys(CurrentUser);
             }
-            if (command == "Manage Personal Policies" || command == "1")
+            if (command == "manage personal policies" || command == "1")
             {
                 ViewPolicys(CurrentUser);
             }
-            if (command == "New Policy" || command == "2")
+            if (command == "new policy" || command == "2")
             {
                 NewPolicy(FakeUser, false, CurrentUser, CurrentUser.Policies.size() + 1);
             }
-            if (command == "Manage All Users" || command == "3")
+            if (command == "manage all users" || command == "3")
             {
                 ViewAllUsers(CurrentUser);
             }
-            else if (command == "Quit" || command == "4") {
+            if (command == "logout" || command == "4") {
+                Login();
+            }
+            else if (command == "quit" || command == "5") {
                 exit(0);
             }
             else
@@ -2089,9 +2782,12 @@ void VehicleInsuranceSystem::Menu(User CurrentUser, bool RootUser) {
         }
     }
 }
-
 void VehicleInsuranceSystem::Login()
 {
+    system("CLS");
+    cout << "======================================================================================================" << endl;
+    cout << "                                   Welcome To 398 Studios Insurance" << endl;
+    cout << "======================================================================================================\n" << endl;
     bool startup = true;
 
     while (startup)
@@ -2100,13 +2796,14 @@ void VehicleInsuranceSystem::Login()
 
         SetConsoleTitle(TEXT("398 Studios Insurance | Launch Menu"));
         string command;
-        cout << "Welcome. Your Current Commands Are: Login | Signup | Quit" << endl;
+        cout << "Welcome. Your Current Commands Are: Login (0) | Signup (1) | Quit (2)" << endl;
         cout << ">";
         getline(cin, command);
+        transform(command.begin(), command.end(), command.begin(), ::tolower);
         //===========================================================================================================================================================
         //                                                                  Login System
         //===========================================================================================================================================================
-        if (command == "Login")
+        if (command == "login" || command == "0")
         {
             SetConsoleTitle(TEXT("398 Studios | Login"));
             system("CLS");
@@ -2154,7 +2851,7 @@ void VehicleInsuranceSystem::Login()
                         cout << "=================================================================================================================================" << endl;
                         cout << "You Account Has Been Banned From The 398 Studios Vehicle Insurance System. Please Contact An Admin To Get This Fixed" << endl;
                         cout << "=================================================================================================================================\n\n\n" << endl;
-                        startup = false;
+                        exit(0);
                     }
                 }
                 else if (CurrentUser.Username == "InvalidUser") {
@@ -2191,7 +2888,7 @@ void VehicleInsuranceSystem::Login()
             }
         }
 
-        if (command == "RootLogin" || command == "398") {
+        if (command == "rootlogin" || command == "398") {
             system("CLS");
             CurrentUser = SearchForUser("xboxcreepersplays@gmail.com");
             Menu(CurrentUser, true);
@@ -2199,17 +2896,16 @@ void VehicleInsuranceSystem::Login()
         //===========================================================================================================================================================
         //                                                                  Login System
         //===========================================================================================================================================================
-        if (command == "Signup" || command == "signup")
+        if (command == "signup" || command == "1")
         {
             NewUser();
         }
-        if (command == "Quit")
+        if (command == "quit" || command == "2")
         {
-            startup = false;
+            exit(0);
         }
     }
 }
-
 void VehicleInsuranceSystem::NewUser()
 {
     User CurrentUser = User("", "", "", false, false, true, "");
@@ -2219,10 +2915,13 @@ void VehicleInsuranceSystem::NewUser()
     cout << "======================================================================================================" << endl;
     cout << "                             Welcome To 398 Studios Insurance" << endl;
     cout << "======================================================================================================\n" << endl;
-    cout << "Please Enter The Email For This Account: ";
+    cout << "Please Enter The Email For This Account (N To Leave): ";
     string Email;
 regEmail:
     getline(cin, Email);
+    if (Email == "N" || Email == "n") {
+        Login();
+    }
     while (Email.length() < 3) {
         cout << "Please Enter A Email Longer Than 3 Chars: ";
         getline(cin, Email);
@@ -2258,7 +2957,8 @@ regEmail:
 regConfirm:
     getline(cin, StringValue);
     if (!StringValue.empty()) {
-        if (StringValue == "Y" || StringValue == "y") {
+        transform(StringValue.begin(), StringValue.end(), StringValue.begin(), ::tolower);
+        if (StringValue == "y") {
             string UserFileString = "Files/" + Email + ".json";
             ofstream UserFile(UserFileString);
 
@@ -2304,7 +3004,7 @@ regConfirm:
             CurrentUser = SearchForUser(Email);
             Menu(CurrentUser, CurrentUser.RootUser);
         }
-        if (StringValue == "N" || StringValue == "n") {
+        if (StringValue == "n") {
             system("CLS");
             exit(0);
         }
@@ -2318,3 +3018,4 @@ regConfirm:
         goto regConfirm;
     }
 }
+// 3000 Lines Baby

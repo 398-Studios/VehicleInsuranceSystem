@@ -61,7 +61,7 @@ public:
     static void ViewAllPolicys(User Admin);
 
     //Why Oh Why Do I Do This Stuff
-    static void ViewUser(User CurrentUser);
+    static void ViewUser(User Admin, bool AdminEdit, User CurrentUser);
     
     static void ViewAllUsers(User Admin);
 
